@@ -1,0 +1,2 @@
+include ':app', ':Tensor', ':Tensor2', ':ts3', ':ts4', ':LiveFeed'
+rootProject.name='ClassifyFromDifferenSources'

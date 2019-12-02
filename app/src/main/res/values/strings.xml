@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ClassifyFromDifferenSources</string>
+    <string name="test_unsuccessful">test unsuccessful</string>
+</resources>
