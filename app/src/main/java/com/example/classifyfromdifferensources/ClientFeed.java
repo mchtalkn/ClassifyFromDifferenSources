@@ -48,7 +48,7 @@ public class ClientFeed extends AppCompatActivity {
 
     public static Bitmap screenshot(WebView webView) {
         try {
-            float scale = webView.getScale();
+            //float scale = webView.getScale();
             // int height = (int) (webView.getContentHeight()/scale+ 0.5);
             //Bitmap bitmap = Bitmap.createBitmap((int) (webView.getWidth()/scale), height, Bitmap.Config.ARGB_8888);
             Bitmap bitmap = Bitmap.createBitmap(800, 600, Bitmap.Config.ARGB_8888);
@@ -86,7 +86,7 @@ public class ClientFeed extends AppCompatActivity {
                             bmp = screenshot(clientView);
                             screenShot.setImageBitmap(bmp);
                             long i = System.currentTimeMillis();
-                            time.setText(String.format(Locale.ENGLISH, "%f", results.get(0).getConfidence()));
+                            //time.setText(String.format(Locale.ENGLISH, "%f", results.get(0).getConfidence()));
                             if (threadFree) {
                                 isProcessFinished = false;
                                 Bitmap tmpBmp = bmp.copy(bmp.getConfig(), true);
