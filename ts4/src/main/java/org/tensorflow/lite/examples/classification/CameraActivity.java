@@ -99,7 +99,7 @@ public abstract class CameraActivity extends AppCompatActivity
   private Spinner deviceSpinner;
   private TextView threadsTextView;
 
-  private Classifier.Model model = Classifier.Model.QUANTIZED;
+  private Classifier.Model model = Classifier.Model.MY;
   private Classifier.Device device = Classifier.Device.CPU;
   private int numThreads = -1;
 
@@ -636,7 +636,7 @@ public abstract class CameraActivity extends AppCompatActivity
 
   @Override
   public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-    if (parent == modelSpinner) {
+      if (parent == modelSpinner) {
       setModel(Classifier.Model.valueOf(parent.getItemAtPosition(pos).toString().toUpperCase()));
     } else if (parent == deviceSpinner) {
       setDevice(Classifier.Device.valueOf(parent.getItemAtPosition(pos).toString()));

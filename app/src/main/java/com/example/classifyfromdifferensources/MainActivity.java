@@ -35,13 +35,14 @@ import static com.example.classifyfromdifferensources.R.string.test_unsuccessful
 public class MainActivity extends AppCompatActivity {
     public static Classifier classifier;
     final int REQUEST_GET_SINGLE_FILE = 303;
+    final int REQUEST_GET_SINGLE_PHOTO = 302;
     TextView recTag0, recConf0;
     ImageView img;
-    Button btnGallery, btnStream, btnCamera, btnLiveStream;
+    Button btnGallery, btnStream, btnCamera, btnLiveStream,btnPhoto;
     Bitmap bitmap, resizedBitmap, resizedBitmap2;
     //Logger LOGGER= Logger.getGlobal();
     int resultSize = 0;
-    private Classifier.Model model = Classifier.Model.QUANTIZED;
+    private Classifier.Model model = Classifier.Model.MY;
     private Classifier.Device device = Classifier.Device.CPU;
     private Context myContext;
 
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         btnGallery = findViewById(R.id.openFromGallery);
         btnStream = findViewById(R.id.liveBtn);
         btnCamera = findViewById(R.id.cameraButton);
+        btnPhoto = findViewById(R.id.btnCamPhoto);
         btnLiveStream = findViewById(R.id.btnLiveStream);
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.stp);
         final String mImageURLString = "https://homepages.cae.wisc.edu/~ece533/images/airplane.png";
@@ -85,6 +87,13 @@ public class MainActivity extends AppCompatActivity {
                 intent.addCategory(Intent.CATEGORY_OPENABLE);
                 intent.setType("image/*");
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_GET_SINGLE_FILE);
+            }
+        });
+        btnPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(takePictureIntent, REQUEST_GET_SINGLE_PHOTO);
             }
         });
         btnStream.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
 
             }
+
         });
         btnLiveStream.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,6 +167,11 @@ public class MainActivity extends AppCompatActivity {
                     // Set the image in ImageView
                     Uri imageUri = data.getData();
                     bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                    img.setImageBitmap(bitmap);
+                    processImage(bitmap, img, recTag0, recConf0);
+                } else if (requestCode == REQUEST_GET_SINGLE_PHOTO){
+                    Bundle extras = data.getExtras();
+                    Bitmap bitmap = (Bitmap) extras.get("data");
                     img.setImageBitmap(bitmap);
                     processImage(bitmap, img, recTag0, recConf0);
                 }

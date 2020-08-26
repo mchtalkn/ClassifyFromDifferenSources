@@ -6,6 +6,8 @@
     <string-array name="models">
         <item>Quantized</item>
         <item>Float</item>
+        <item>MY</item>
+        <item>MY512</item>
     </string-array>
 
     <string name="device">Device:</string>
